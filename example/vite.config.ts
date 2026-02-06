@@ -21,11 +21,11 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@teather/lightgraph',
+        find: 'litegraph-react',
         replacement: resolve(__dirname, '../dist/index.esm.js'),
       },
       {
-        find: '@teather/lightgraph/styles',
+        find: 'litegraph-react/styles',
         replacement: resolve(__dirname, '../dist/lightgraph.css'),
       },
       {
@@ -39,6 +39,6 @@ export default defineConfig({
     emptyOutDir: true,
   },
   optimizeDeps: {
-    exclude: ['@teather/lightgraph'],
+    exclude: ['litegraph-react'],
   },
 });

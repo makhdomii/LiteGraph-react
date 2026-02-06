@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@teather/lightgraph": ["../dist/index.d.ts"],
+      "litegraph-react": ["../dist/index.d.ts"],
       "@/*": ["../src/*"]
     }
   },

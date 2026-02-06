@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { GraphCanvas, useGraph, createNode } from '@teather/lightgraph';
-import type { SerializedLGraph } from '@teather/lightgraph';
+import { GraphCanvas, useGraph, createNode } from 'litegraph-react';
+import type { SerializedLGraph } from 'litegraph-react';
 
 /**
  * Example app demonstrating LiteGraph React integration

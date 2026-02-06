@@ -1,5 +1,5 @@
 {
-  "name": "@teather/lightgraph",
+  "name": "litegraph-react",
   "version": "1.0.0",
   "description": "React-compatible version of LiteGraph.js - A graph node engine and editor",
   "main": "dist/index.js",

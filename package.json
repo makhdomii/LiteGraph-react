@@ -1,6 +1,6 @@
 {
   "name": "@makhdomii/litegraph-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React-compatible version of LiteGraph.js - A graph node engine and editor",
   "repository": {
     "type": "git",

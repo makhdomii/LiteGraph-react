@@ -1,0 +1,17 @@
+.lightgraph-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #1e1e1e;
+}
+
+.lightgraph-container canvas {
+  display: block;
+  outline: none;
+}
+
+/* Ensure proper rendering */
+.lightgraph-container * {
+  box-sizing: border-box;
+}

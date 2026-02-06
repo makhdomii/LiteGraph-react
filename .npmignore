@@ -1,0 +1,47 @@
+# Source files
+src/
+example/
+
+# Development files
+.eslintrc.js
+.eslintignore
+.gitignore
+.npmignore
+*.config.ts
+*.config.js
+tsconfig.json
+vitest.config.ts
+
+# Test files
+**/__tests__/
+**/*.test.ts
+**/*.test.tsx
+TESTING.md
+
+# Build artifacts (only dist should be published)
+coverage/
+.nyc_output/
+
+# Development dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+*.local
+
+# Environment files
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

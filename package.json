@@ -1,7 +1,15 @@
 {
-  "name": "litegraph-react",
+  "name": "@makhdomii/litegraph-react",
   "version": "1.0.0",
   "description": "React-compatible version of LiteGraph.js - A graph node engine and editor",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/makhdomii/LiteGraph-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/makhdomii/LiteGraph-react/issues"
+  },
+  "homepage": "https://github.com/makhdomii/LiteGraph-react#readme",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",

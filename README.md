@@ -1,4 +1,4 @@
-# litegraph-react
+# @makhdomii/litegraph-react
 
 A React-compatible version of [LiteGraph.js](https://github.com/jagenjo/litegraph.js) - A graph node engine and editor written in JavaScript, similar to Unreal Blueprints or Pure Data. This package provides seamless React integration with full TypeScript support, making it easy to build visual node-based editors in React applications.
 
@@ -169,14 +169,14 @@ Full TypeScript support with exported types:
 ## Installation
 
 ```bash
-npm install litegraph-react litegraph.js
+npm install @makhdomii/litegraph-react litegraph.js
 ```
 
 ## Quick Start
 
 ```tsx
 import React from 'react';
-import { GraphCanvas } from 'litegraph-react';
+import { GraphCanvas } from '@makhdomii/litegraph-react';
 import 'litegraph.js/css/litegraph.css';
 
 function App() {
@@ -199,7 +199,7 @@ function App() {
 ### Basic Usage
 
 ```tsx
-import { GraphCanvas } from 'litegraph-react';
+import { GraphCanvas } from '@makhdomii/litegraph-react';
 
 <GraphCanvas
   width={1920}
@@ -215,7 +215,7 @@ import { GraphCanvas } from 'litegraph-react';
 ### Using the Hook API
 
 ```tsx
-import { GraphCanvas, useGraph } from 'litegraph-react';
+import { GraphCanvas, useGraph } from '@makhdomii/litegraph-react';
 
 function MyGraphEditor() {
   return (
@@ -248,7 +248,7 @@ function GraphControls() {
 ### Programmatic Node Creation
 
 ```tsx
-import { GraphCanvas, createNode } from 'litegraph-react';
+import { GraphCanvas, createNode } from '@makhdomii/litegraph-react';
 
 function App() {
   const graphRef = useRef(null);
@@ -280,7 +280,7 @@ function App() {
 ### Loading and Saving Graphs
 
 ```tsx
-import { GraphCanvas, useGraph } from 'litegraph-react';
+import { GraphCanvas, useGraph } from '@makhdomii/litegraph-react';
 
 function GraphWithSave() {
   return (
@@ -326,7 +326,7 @@ function SaveLoadControls() {
 ### Advanced Canvas Configuration
 
 ```tsx
-import { GraphCanvas } from 'litegraph-react';
+import { GraphCanvas } from '@makhdomii/litegraph-react';
 
 <GraphCanvas
   width={1920}
@@ -360,7 +360,7 @@ import { GraphCanvas } from 'litegraph-react';
 ### Using Context Directly
 
 ```tsx
-import { GraphProvider, useGraphContext } from 'litegraph-react';
+import { GraphProvider, useGraphContext } from '@makhdomii/litegraph-react';
 
 function CustomComponent() {
   const { graph, canvas, selectedNode, isReady } = useGraphContext();
@@ -464,7 +464,7 @@ import 'litegraph.js/css/litegraph.css';
 Or use the included styles:
 
 ```tsx
-import 'litegraph-react/styles';
+import '@makhdomii/litegraph-react/styles';
 ```
 
 The component also supports custom styling through `className` and `style` props:
@@ -491,7 +491,7 @@ import type {
   LGraphNode,
   LGraphCanvas,
   SerializedLGraph,
-} from 'litegraph-react';
+} from '@makhdomii/litegraph-react';
 ```
 
 ## Performance Considerations

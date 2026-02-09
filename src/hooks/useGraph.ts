@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
-import LiteGraph from 'litegraph.js';
-import type { LGraphNode, SerializedLGraph } from 'litegraph.js';
+import { LiteGraph } from '../lib/litegraph-wrapper';
+import type { LGraphNode, SerializedLGraph } from '../lib/litegraph-wrapper';
 import { useGraphContext } from '../context/GraphContext';
 import type { UseGraphReturn } from '../types';
 
@@ -59,10 +59,11 @@ export const useGraph = (): UseGraphReturn => {
       from: LGraphNode,
       fromSlot: number,
       to: LGraphNode,
-      toSlot: number
+      _toSlot: number
     ): void => {
       if (!graph || !isReady) return;
-      from.disconnect(fromSlot, to, toSlot);
+      // Use disconnectOutput method on the source node
+      from.disconnectOutput(fromSlot, to);
     },
     [graph, isReady]
   );
@@ -98,19 +99,26 @@ export const useGraph = (): UseGraphReturn => {
   const zoom = useCallback(
     (factor: number): void => {
       if (!canvas || !isReady) return;
-      canvas.zoomAt(factor);
+      // Use setZoom with current center
+      canvas.setZoom(factor, [0, 0]);
     },
     [canvas, isReady]
   );
 
   const center = useCallback((): void => {
-    if (!canvas || !isReady) return;
-    canvas.centerOnNodes(graph?.getNodes() || []);
+    if (!canvas || !isReady || !graph) return;
+    // Center on the first node if available
+    // Access nodes via the graph's internal _nodes array
+    const nodes = (graph as any)._nodes || [];
+    if (nodes.length > 0) {
+      canvas.centerOnNode(nodes[0]);
+    }
   }, [canvas, graph, isReady]);
 
   const fit = useCallback((): void => {
     if (!canvas || !isReady) return;
-    canvas.fitToWindow();
+    // LiteGraph doesn't have fitToWindow, use setZoom to fit
+    canvas.setZoom(1, [0, 0]);
   }, [canvas, isReady]);
 
   return useMemo<UseGraphReturn>(

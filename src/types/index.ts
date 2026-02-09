@@ -1,4 +1,4 @@
-import type { LGraph, LGraphNode, LGraphCanvas, SerializedLGraph } from 'litegraph.js';
+import type { LGraph, LGraphNode, LGraphCanvas, SerializedLGraph } from '../lib/litegraph-wrapper';
 
 export interface GraphCanvasProps {
   /**

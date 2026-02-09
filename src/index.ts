@@ -9,7 +9,7 @@ export type {
   LGraphNode,
   LGraphCanvas,
   SerializedLGraph,
-} from 'litegraph.js';
+} from './lib/litegraph-wrapper';
 
 // Export types
 export type {
@@ -22,8 +22,9 @@ export type {
 
 // Utility function to create nodes (wraps LiteGraph.createNode)
 // Users should use this instead of importing LiteGraph directly
-import LiteGraph from 'litegraph.js';
-export const createNode = (type: string): import('litegraph.js').LGraphNode | null => {
+import { LiteGraph } from './lib/litegraph-wrapper';
+import type { LGraphNode } from './lib/litegraph-wrapper';
+export const createNode = (type: string): LGraphNode | null => {
   return LiteGraph.createNode(type);
 };
 

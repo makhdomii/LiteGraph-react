@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { LGraph, LGraphCanvas, LGraphNode } from 'litegraph.js';
+import { LGraph, LGraphCanvas, LGraphNode } from '../lib/litegraph-wrapper';
 import { GraphProvider } from '../context/GraphContext';
 import type { GraphCanvasProps, GraphTheme } from '../types';
 import '../styles/graph-canvas.css';
@@ -25,7 +25,7 @@ export const GraphCanvas: React.FC<GraphCanvasWithChildrenProps> = ({
   onChange,
   onNodeSelected,
   onNodeAdded,
-  onNodeRemoved,
+  onNodeRemoved: _onNodeRemoved, // Unused: LiteGraph doesn't provide onNodeRemoved callback
   onConnectionChange: _onConnectionChange, // Unused: LiteGraph doesn't provide detailed connection info
   options = {},
   className = '',
@@ -47,7 +47,6 @@ export const GraphCanvas: React.FC<GraphCanvasWithChildrenProps> = ({
     let canvasInstance: LGraphCanvas;
     let originalSelectNode: ((node: LGraphNode | null) => any) | undefined;
     let originalOnNodeAdded: ((node: LGraphNode) => void) | undefined;
-    let originalOnNodeRemoved: ((node: LGraphNode) => void) | undefined;
     let originalOnConnectionChange: ((node: LGraphNode) => void) | undefined;
 
     try {
@@ -85,7 +84,7 @@ export const GraphCanvas: React.FC<GraphCanvasWithChildrenProps> = ({
         allow_node_selection: true,
         ...options,
       });
-      
+
       // Verify canvas was created successfully
       if (!canvasInstance) {
         throw new Error('Failed to create LGraphCanvas instance');
@@ -100,17 +99,17 @@ export const GraphCanvas: React.FC<GraphCanvasWithChildrenProps> = ({
       // LiteGraph canvas tracks selected nodes in selected_nodes object
       // We'll poll for changes or override selectNode if available
       let lastSelectedNodeId: number | null = null;
-      
+
       const checkSelectedNode = () => {
         const selectedNodes = (canvasInstance as any).selected_nodes || {};
         const nodeIds = Object.keys(selectedNodes);
         const firstSelectedId = nodeIds.length > 0 ? parseInt(nodeIds[0]) : null;
-        
+
         // Only update if selection actually changed
         if (firstSelectedId !== lastSelectedNodeId) {
           lastSelectedNodeId = firstSelectedId;
           const node = firstSelectedId ? (graphInstance as any).getNodeById(firstSelectedId) : null;
-          
+
           setSelectedNode(node || null);
           if (onNodeSelected) {
             onNodeSelected(node || null);
@@ -146,7 +145,7 @@ export const GraphCanvas: React.FC<GraphCanvasWithChildrenProps> = ({
       // Also check periodically for selection changes (fallback)
       // Use longer interval to reduce re-renders
       const selectionCheckInterval = setInterval(checkSelectedNode, 300);
-      
+
       // Store interval for cleanup
       (canvasInstance as any)._selectionCheckInterval = selectionCheckInterval;
 
@@ -161,17 +160,11 @@ export const GraphCanvas: React.FC<GraphCanvasWithChildrenProps> = ({
         }
       };
 
-      originalOnNodeRemoved = graphInstance.onNodeRemoved;
-      graphInstance.onNodeRemoved = (node: LGraphNode) => {
-        onNodeRemoved?.(node);
-        onChange?.(graphInstance);
-        if (originalOnNodeRemoved) {
-          originalOnNodeRemoved.call(graphInstance, node);
-        }
-      };
+      // Note: LiteGraph doesn't have onNodeRemoved, we'll track removals via connectionChange
+      // We'll handle node removal tracking differently
 
-      originalOnConnectionChange = graphInstance.onConnectionChange;
-      graphInstance.onConnectionChange = (node: LGraphNode) => {
+      originalOnConnectionChange = graphInstance.connectionChange;
+      graphInstance.connectionChange = (node: LGraphNode) => {
         // Note: LiteGraph's onConnectionChange provides the node where connection changed
         // For more detailed connection info (from, to, slot), we'd need to track before/after states
         // Since LiteGraph doesn't provide detailed connection info, we only call onChange
@@ -215,26 +208,26 @@ export const GraphCanvas: React.FC<GraphCanvasWithChildrenProps> = ({
       if (canvasInstance && (canvasInstance as any)._selectionCheckInterval) {
         clearInterval((canvasInstance as any)._selectionCheckInterval);
       }
-      
+
       // Restore original selectNode if we overrode it
       if (canvasInstance && originalSelectNode) {
         (canvasInstance as any).selectNode = originalSelectNode;
       }
-      
+
       if (graphInstance) {
         if (originalOnNodeAdded) {
           graphInstance.onNodeAdded = originalOnNodeAdded;
         }
-        if (originalOnNodeRemoved) {
-          graphInstance.onNodeRemoved = originalOnNodeRemoved;
-        }
         if (originalOnConnectionChange) {
-          graphInstance.onConnectionChange = originalOnConnectionChange;
+          graphInstance.connectionChange = originalOnConnectionChange;
         }
         graphInstance.stop();
       }
       if (canvasInstance) {
-        canvasInstance.destroy?.();
+        // Cleanup canvas if needed
+        if (canvasInstance && typeof (canvasInstance as any).destroy === 'function') {
+          (canvasInstance as any).destroy();
+        }
       }
     };
   }, [

@@ -1,10 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { GraphCanvas } from '../GraphCanvas';
-import { LGraph } from 'litegraph.js';
+import { LGraph } from '../../lib/litegraph-wrapper';
 
-// Mock LiteGraph - classes must be defined inside the mock factory
-vi.mock('litegraph.js', () => {
+// Mock LiteGraph wrapper's dependency
+vi.mock('../../lib/litegraph.js', () => {
+  // This mock sets up the global LiteGraph object that the wrapper expects
   class MockLGraph {
     add = vi.fn();
     remove = vi.fn();
@@ -16,12 +17,32 @@ vi.mock('litegraph.js', () => {
     getNodes = vi.fn(() => []);
     on = vi.fn();
     off = vi.fn();
+    onNodeAdded = undefined;
+    connectionChange = undefined;
+    // Add required properties to satisfy type checks
+    filter = '';
+    catch_errors = false;
+    config = {};
+    elapsed_time = 0;
+    fixedtime = 0;
+    fixedtime_lapse = 0;
+    globaltime = 0;
+    inputs = {};
+    iteration = 0;
+    last_link_id = 0;
+    last_node_id = 0;
+    last_update_time = 0;
+    links = {};
+    list_of_graphcanvas = [];
+    outputs = {};
+    runningtime = 0;
+    starttime = 0;
+    status = 1;
   }
 
   class MockLGraphCanvas {
-    zoomAt = vi.fn();
-    centerOnNodes = vi.fn();
-    fitToWindow = vi.fn();
+    setZoom = vi.fn();
+    centerOnNode = vi.fn();
     setLiveMode = vi.fn();
     setGraph = vi.fn();
     destroy = vi.fn();
@@ -32,16 +53,24 @@ vi.mock('litegraph.js', () => {
         backgroundColor: '',
       },
     };
+    selected_nodes = {};
+    // Add required properties to satisfy type checks
+    allow_dragcanvas = true;
+    allow_dragnodes = true;
+    allow_interaction = true;
+    allow_reconnect_links = true;
   }
 
-  return {
-    default: {
-      createNode: vi.fn(),
-    },
+  // Set up global LiteGraph object
+  (globalThis as any).LiteGraph = {
+    createNode: vi.fn(),
     LGraph: MockLGraph,
     LGraphCanvas: MockLGraphCanvas,
     LGraphNode: vi.fn(),
+    VERSION: 1,
   };
+
+  return {};
 });
 
 describe('GraphCanvas', () => {
@@ -105,7 +134,7 @@ describe('GraphCanvas', () => {
       links: [],
       groups: [],
       config: {},
-      extra: {},
+      version: 1,
     };
     const onReady = vi.fn();
     const { container } = render(<GraphCanvas width={800} height={600} data={data} onReady={onReady} />);

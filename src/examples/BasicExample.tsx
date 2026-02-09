@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import LiteGraph from 'litegraph.js';
+import { LiteGraph } from '../lib/litegraph-wrapper';
 import { GraphCanvas, useGraph } from '../index';
 
 // Note: LiteGraph should be imported directly from 'litegraph.js'

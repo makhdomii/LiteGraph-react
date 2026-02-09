@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render } from '@testing-library/react';
 import { GraphProvider, useGraphContext } from '../GraphContext';
-import type { LGraph, LGraphCanvas, LGraphNode } from 'litegraph.js';
+import type { LGraph, LGraphCanvas, LGraphNode } from '../../lib/litegraph-wrapper';
 
 describe('GraphContext', () => {
   it('should provide graph context values', () => {

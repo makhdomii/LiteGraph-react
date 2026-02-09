@@ -1,3 +1,6 @@
+/* Import bundled LiteGraph.css */
+@import '../lib/litegraph.css';
+
 .lightgraph-container {
   position: relative;
   width: 100%;

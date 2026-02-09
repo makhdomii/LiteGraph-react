@@ -13,6 +13,10 @@ export default defineConfig({
       rollupTypes: true,
     }),
   ],
+  resolve: {
+    // Ensure .js files can be imported as modules
+    extensions: ['.js', '.ts', '.tsx', '.json'],
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
@@ -31,6 +35,8 @@ export default defineConfig({
         // Optimize chunk size warnings
         manualChunks: undefined,
       },
+      // Bundle litegraph.js (it's in src/lib/)
+      // Don't externalize it - we want it bundled
     },
     sourcemap: true,
     minify: 'esbuild', // Enable minification to reduce bundle size

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo } from 'react';
-import type { LGraph, LGraphCanvas, LGraphNode } from 'litegraph.js';
+import type { LGraph, LGraphCanvas, LGraphNode } from '../lib/litegraph-wrapper';
 import type { GraphContextValue } from '../types';
 
 const GraphContext = createContext<GraphContextValue | null>(null);

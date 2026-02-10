@@ -52,10 +52,6 @@ See the [full documentation](https://github.com/makhdomii/LiteGraph-react#readme
 npm run build
 ```
 
-### Publishing
-
-See [PUBLISH.md](./PUBLISH.md) for publishing instructions.
-
 ## 📄 License
 
 MIT

@@ -1,67 +1,75 @@
 # LiteGraph React Example
 
-This directory contains a development example application to test and demonstrate the LiteGraph React library.
+Multi-page development gallery for `@makhdomii/litegraph-react`.
 
-## Running the Example
-
-To start the development server:
+## Running
 
 ```bash
 npm run dev:example
 ```
 
-This will:
-- Build the library package first
-- Start a Vite dev server on `http://localhost:3000`
-- Automatically open the browser
-- Use the built package from `dist/` (not source)
+This builds the library, then serves the example app on `http://localhost:3000` using `dist/` (not source).
 
-**Important:** If you see errors about `.on()` not being a function:
-1. **Stop the dev server** (Ctrl+C)
-2. **Clear browser cache** (Ctrl+Shift+R or Ctrl+F5 for hard refresh)
-3. **Rebuild the package**: `npm run build`
-4. **Restart the dev server**: `npm run dev:example`
-
-**Note:** The example app uses the built version of the package (`dist/`), so you need to rebuild after making changes to the source code:
-
-```bash
-npm run build
-```
-
-Or use the watch mode to rebuild automatically:
+For auto-rebuild while editing the library:
 
 ```bash
 npm run dev:example:watch
 ```
 
-## Examples Included
+If you see errors about `.on()` not being a function: stop the server, hard-refresh the browser, run `npm run build`, then restart `npm run dev:example`.
 
-The example app includes three different usage patterns:
+## Routes
 
-### 1. Basic Example
-Minimal setup showing the simplest way to use `GraphCanvas` component.
+### Getting started
 
-### 2. Programmatic Example
-Demonstrates how to programmatically add nodes using refs and the LiteGraph API.
+| Path | Situation |
+|------|-----------|
+| `/` | Catalog of all examples |
+| `/basic` | Mounted `GraphCanvas` with seeded Const → Watch |
+| `/programmatic` | `createNode` + graph ref toolbar |
+| `/hooks` | `useGraph` add / run / save / load / clear |
 
-### 3. Hooks API Example
-Shows how to use the `useGraph` hook for graph manipulation, including:
-- Adding/removing nodes
-- Starting/stopping graph execution
-- Saving/loading graph data
-- Clearing the graph
+### React APIs
 
-## Testing Your Changes
+| Path | Situation |
+|------|-----------|
+| `/theme` | `theme` prop |
+| `/live-mode` | `liveMode` + start/stop |
+| `/options` | Restricted `options` (no context menu / zoom) |
+| `/external-graph` | External `LGraph` via `graph` prop |
+| `/data-prop` | Initial `data: SerializedLGraph` |
+| `/viewport` | `zoom` / `center` / `fit` |
+| `/connect` | Programmatic `connect` / `disconnect` |
+| `/callbacks` | `onReady`, `onChange`, `onNodeSelected`, `onNodeAdded` |
 
-When you make changes to the library source code in `../src/`, the example will automatically reload to show your changes. This makes it easy to test and verify that your library works correctly.
+### Advanced
 
-## File Structure
+| Path | Situation |
+|------|-----------|
+| `/custom-nodes` | `LiteGraph.registerNodeType` demos |
+| `/subgraphs` | `graph/subgraph` nested graph |
+| `/groups` | `LGraphGroup` |
+
+### Node library tours
+
+| Path | Situation |
+|------|-----------|
+| `/nodes/basic` | const, watch, string, boolean, console |
+| `/nodes/math` | operation, compare, formula, clamp |
+| `/nodes/events` | trigger, delay, timer, sequence, branch |
+| `/nodes/widgets` | button, toggle, number, combo, knob |
+| `/nodes/logic` | AND, OR, NOT, selector, IF |
+| `/nodes/string-input` | string + gamepad |
+| `/nodes/math3d` | vec2 / vec3 converters |
+
+## File structure
 
 ```
 example/
-├── index.html      # HTML entry point
-├── main.tsx        # React entry point
-├── App.tsx         # Main example app with all examples
-├── vite.config.ts  # Vite configuration for dev server
-└── tsconfig.json   # TypeScript configuration
+├── App.tsx                 # Shell: nav + status + Outlet
+├── main.tsx                # BrowserRouter + routes
+├── chrome.ts               # Shared palette / button styles
+├── components/             # ExampleLayout, StatusBar
+├── lib/                    # Helpers, catalog, demo nodes
+└── pages/                  # One page per use case
 ```

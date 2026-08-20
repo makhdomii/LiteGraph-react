@@ -1,5 +1,6 @@
 /* Import bundled LiteGraph.css */
 @import '../lib/litegraph.css';
+@import './overlays.css';
 
 .lightgraph-container {
   position: relative;

@@ -1,0 +1,204 @@
+/* Overlay chrome: dark technical editor, not the original 2012 pills. */
+.lightgraph-container,
+.litegraph.graphdialog,
+.litegraph.litecontextmenu,
+.litegraph.litesearchbox {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lightgraph-container .graphdialog,
+.litegraph.graphdialog {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 220px;
+  max-width: min(360px, calc(100vw - 24px));
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #252526;
+  border: 1px solid #3c3c3c;
+  color: #e8e8e8;
+  font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.35;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  z-index: 30;
+}
+
+.lightgraph-container .graphdialog.rounded,
+.litegraph.graphdialog.rounded {
+  border-radius: 8px;
+  padding-right: 12px;
+}
+
+.lightgraph-container .graphdialog .name,
+.litegraph.graphdialog .name {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #9d9d9d;
+  text-wrap: pretty;
+}
+
+.lightgraph-container .graphdialog input,
+.lightgraph-container .graphdialog textarea,
+.lightgraph-container .graphdialog select,
+.lightgraph-container .graphdialog .value,
+.litegraph.graphdialog input,
+.litegraph.graphdialog textarea,
+.litegraph.graphdialog select,
+.litegraph.graphdialog .value {
+  width: 100%;
+  min-width: 0;
+  min-height: 32px;
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  color: #e8e8e8;
+  font-size: 13px;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.lightgraph-container .graphdialog textarea,
+.litegraph.graphdialog textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.lightgraph-container .graphdialog input:focus,
+.lightgraph-container .graphdialog textarea:focus,
+.lightgraph-container .graphdialog select:focus,
+.litegraph.graphdialog input:focus,
+.litegraph.graphdialog textarea:focus,
+.litegraph.graphdialog select:focus {
+  outline: 2px solid #4fc3f7;
+  outline-offset: 1px;
+  border-color: #007acc;
+}
+
+.lightgraph-container .graphdialog button,
+.litegraph.graphdialog button,
+.lightgraph-container .graphdialog button.rounded,
+.litegraph.graphdialog button.rounded,
+.lightgraph-container .graphdialog input.rounded,
+.litegraph.graphdialog input.rounded {
+  align-self: flex-end;
+  min-width: 44px;
+  min-height: 32px;
+  margin: 0;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: #007acc;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition-property: background-color, transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.lightgraph-container .graphdialog button:hover,
+.litegraph.graphdialog button:hover {
+  background: #1c8ad6;
+}
+
+.lightgraph-container .graphdialog button:active,
+.litegraph.graphdialog button:active {
+  transform: scale(0.96);
+}
+
+.litegraph.litesearchbox {
+  min-width: 280px;
+  max-width: 360px;
+  background: #252526;
+  padding: 10px 12px 8px;
+}
+
+.litegraph.litesearchbox input,
+.litegraph.litesearchbox select {
+  min-height: 32px;
+  margin: 0;
+  background: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  border-radius: 6px;
+}
+
+.litegraph.litesearchbox .helper {
+  margin-top: 4px;
+  max-height: 240px;
+  border-radius: 6px;
+  overflow: auto;
+}
+
+.litegraph.lite-search-item {
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: transparent;
+  color: #e8e8e8;
+  font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  font-size: 13px;
+}
+
+.litegraph.lite-search-item:hover,
+.litegraph.lite-search-item.selected {
+  background: #094771;
+  color: #fff;
+}
+
+.litegraph.litecontextmenu {
+  font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  min-width: 180px;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #3c3c3c;
+  background-color: #252526 !important;
+  color: #e8e8e8;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.04) !important;
+  z-index: 30;
+}
+
+.litegraph .litemenu-title {
+  margin: 0 0 4px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: #1e1e1e;
+  color: #9d9d9d;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.litegraph .litemenu-entry {
+  margin: 1px 0;
+  padding: 6px 10px;
+  border-radius: 4px;
+  min-height: 28px;
+  color: #e8e8e8;
+  font-size: 13px;
+}
+
+.litegraph .litemenu-entry:hover:not(.disabled):not(.separator) {
+  background-color: #094771 !important;
+  color: #fff;
+  transition-property: background-color, color;
+  transition-duration: 120ms;
+  transition-timing-function: ease-out;
+}

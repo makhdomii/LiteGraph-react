@@ -5,6 +5,8 @@
 // Import the LiteGraph.js script (it sets up globals when executed)
 // @ts-ignore - This is a UMD script file that sets up globals
 import './litegraph.js';
+import { patchLGraphCanvas } from './litegraph-canvas-patches';
+import { patchLiteGraphOverlays } from './litegraph-overlays';
 
 // Access the global LiteGraph object after the script loads
 // The UMD script attaches LiteGraph to globalThis/window
@@ -17,6 +19,9 @@ const LiteGraphGlobal =
 if (!LiteGraphGlobal) {
   throw new Error('LiteGraph.js failed to load. Make sure litegraph.js is properly bundled.');
 }
+
+patchLGraphCanvas(LiteGraphGlobal.LGraphCanvas);
+patchLiteGraphOverlays(LiteGraphGlobal);
 
 // Export the LiteGraph namespace and classes as values
 export const LiteGraph = LiteGraphGlobal;

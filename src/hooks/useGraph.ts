@@ -99,8 +99,8 @@ export const useGraph = (): UseGraphReturn => {
   const zoom = useCallback(
     (factor: number): void => {
       if (!canvas || !isReady) return;
-      // Use setZoom with current center
-      canvas.setZoom(factor, [0, 0]);
+      const currentScale = (canvas as { scale?: number }).scale ?? 1;
+      canvas.setZoom(currentScale * factor, [0, 0]);
     },
     [canvas, isReady]
   );

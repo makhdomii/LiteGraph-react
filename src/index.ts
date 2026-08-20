@@ -3,10 +3,16 @@ export { GraphCanvas } from './components/GraphCanvas';
 export { GraphProvider, useGraphContext } from './context/GraphContext';
 export { useGraph } from './hooks/useGraph';
 
-// Re-export LiteGraph types and classes for convenience
-export type {
+// Runtime LiteGraph classes (custom nodes, external graphs, groups)
+export {
+  LiteGraph,
   LGraph,
   LGraphNode,
+  LGraphGroup,
+} from './lib/litegraph-wrapper';
+
+// Types that are type-only (classes above also act as types)
+export type {
   LGraphCanvas,
   SerializedLGraph,
 } from './lib/litegraph-wrapper';
@@ -21,10 +27,9 @@ export type {
 } from './types';
 
 // Utility function to create nodes (wraps LiteGraph.createNode)
-// Users should use this instead of importing LiteGraph directly
 import { LiteGraph } from './lib/litegraph-wrapper';
-import type { LGraphNode } from './lib/litegraph-wrapper';
-export const createNode = (type: string): LGraphNode | null => {
+import type { LGraphNode as LGraphNodeType } from './lib/litegraph-wrapper';
+export const createNode = (type: string): LGraphNodeType | null => {
   return LiteGraph.createNode(type);
 };
 

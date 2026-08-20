@@ -184,12 +184,12 @@ describe('useGraph', () => {
 
   it('should disconnect two nodes', () => {
     const { result } = renderHook(() => useGraph(), { wrapper });
-    const fromNode = { disconnect: vi.fn() } as any;
+    const fromNode = { disconnectOutput: vi.fn() } as any;
     const toNode = {} as LGraphNode;
 
     result.current.disconnect(fromNode, 0, toNode, 1);
 
-    expect(fromNode.disconnect).toHaveBeenCalledWith(0, toNode, 1);
+    expect(fromNode.disconnectOutput).toHaveBeenCalledWith(0, toNode);
   });
 
   it('should start graph execution', () => {

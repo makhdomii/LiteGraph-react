@@ -21,12 +21,12 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: 'litegraph-react',
-        replacement: resolve(__dirname, '../dist/index.esm.js'),
+        find: 'litegraph-react/styles',
+        replacement: resolve(__dirname, '../dist/litegraph-react.css'),
       },
       {
-        find: 'litegraph-react/styles',
-        replacement: resolve(__dirname, '../dist/lightgraph.css'),
+        find: 'litegraph-react',
+        replacement: resolve(__dirname, '../dist/index.esm.js'),
       },
       {
         find: '@',

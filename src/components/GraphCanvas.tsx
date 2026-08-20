@@ -224,9 +224,15 @@ export const GraphCanvas: React.FC<GraphCanvasWithChildrenProps> = ({
         graphInstance.stop();
       }
       if (canvasInstance) {
-        // Cleanup canvas if needed
-        if (canvasInstance && typeof (canvasInstance as any).destroy === 'function') {
+        if (typeof (canvasInstance as any).destroy === 'function') {
           (canvasInstance as any).destroy();
+        } else {
+          if (typeof (canvasInstance as any).stopRendering === 'function') {
+            (canvasInstance as any).stopRendering();
+          }
+          if (typeof (canvasInstance as any).unbindEvents === 'function') {
+            (canvasInstance as any).unbindEvents();
+          }
         }
       }
     };

@@ -1,9 +1,11 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { litegraphEsmCompat } from './src/lib/litegraph-esm-compat';
 
 export default defineConfig({
   plugins: [
+    litegraphEsmCompat(),
     react(),
     {
       name: 'mock-css',

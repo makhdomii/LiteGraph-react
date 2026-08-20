@@ -2,9 +2,11 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react';
+import { litegraphEsmCompat } from './src/lib/litegraph-esm-compat';
 
 export default defineConfig({
   plugins: [
+    litegraphEsmCompat(),
     react({
       jsxRuntime: 'automatic',
     }),
@@ -25,6 +27,8 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'esm' : format}.js`,
     },
     rollupOptions: {
+      // ESM rewrites top-level `this` to undefined; LiteGraph's UMD wrappers need a global.
+      context: 'globalThis',
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
         globals: {

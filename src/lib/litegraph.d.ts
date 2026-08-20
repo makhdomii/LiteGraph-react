@@ -1308,6 +1308,8 @@ export declare class LGraphCanvas {
     startRendering(): void;
     /** stops rendering the content of the canvas (to save resources) */
     stopRendering(): void;
+    /** stops rendering and unbinds events so the canvas can be remounted */
+    destroy(): void;
 
     processMouseDown(e: MouseEvent): boolean | undefined;
     processMouseMove(e: MouseEvent): boolean | undefined;

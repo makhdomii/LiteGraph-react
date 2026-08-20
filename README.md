@@ -2,16 +2,16 @@
 
 A React-compatible version of LiteGraph.js - A graph node engine and editor written in JavaScript, similar to Unreal Blueprints or Pure Data. This package provides seamless React integration with full TypeScript support.
 
-## ✨ Features
+## Features
 
-- ✅ **Full React Integration** - Native React components and hooks
-- ✅ **TypeScript Support** - Complete type definitions
-- ✅ **Self-Contained** - Bundles LiteGraph.js directly (no external dependency)
-- ✅ **All LiteGraph Features** - Supports all original LiteGraph.js features
-- ✅ **Customizable** - Theme support and extensive configuration options
-- ✅ **Performance Optimized** - Optimized for React rendering
+- **Full React Integration** - Native React components and hooks
+- **TypeScript Support** - Complete type definitions
+- **Self-Contained** - Bundles LiteGraph.js directly (no external dependency)
+- **All LiteGraph Features** - Supports all original LiteGraph.js features
+- **Customizable** - Theme support and extensive configuration options
+- **Performance Optimized** - Optimized for React rendering
 
-## 📦 Installation
+## Installation
 
 ```bash
 npm install @makhdomii/litegraph-react
@@ -19,11 +19,12 @@ npm install @makhdomii/litegraph-react
 
 **Note:** This package bundles LiteGraph.js directly. Do **not** install the `litegraph.js` npm module—use only `@makhdomii/litegraph-react` from npm.
 
-## 🚀 Quick Start
+## Quick Start
 
 ```tsx
 import React from 'react';
 import { GraphCanvas } from '@makhdomii/litegraph-react';
+import '@makhdomii/litegraph-react/styles';
 
 function App() {
   return (
@@ -40,11 +41,36 @@ function App() {
 }
 ```
 
-## 📚 Documentation
+## Public API
 
-See the [full documentation](https://github.com/makhdomii/LiteGraph-react#readme) for complete API reference and examples.
+| Export | Role |
+|--------|------|
+| `GraphCanvas` | Main React canvas component |
+| `GraphProvider` / `useGraphContext` | Context for graph / canvas / selection |
+| `useGraph` | Imperative helpers (add, connect, serialize, zoom, …) |
+| `createNode` | Create a node by type string |
+| `LiteGraph` | Registry (`registerNodeType`, `createNode`, …) |
+| `LGraph` / `LGraphNode` / `LGraphGroup` | Runtime classes for external graphs and custom nodes |
 
-## 🔧 Development
+Custom nodes:
+
+```tsx
+import { LiteGraph, LGraphNode, createNode } from '@makhdomii/litegraph-react';
+
+// Register once, then createNode('demo/my-node') or use the canvas menu
+```
+
+## Examples
+
+The `example/` app is a multi-page gallery covering React APIs, custom nodes, subgraphs, groups, and built-in node categories:
+
+```bash
+npm run dev:example
+```
+
+Open `http://localhost:3000` for the catalog. See [example/README.md](example/README.md) for the full route list.
+
+## Development
 
 ### Building
 
@@ -52,10 +78,10 @@ See the [full documentation](https://github.com/makhdomii/LiteGraph-react#readme
 npm run build
 ```
 
-## 📄 License
+## License
 
 MIT
 
-## 🙏 Credits
+## Credits
 
 Built on top of [LiteGraph.js](https://github.com/jagenjo/litegraph.js) by [jagenjo](https://github.com/jagenjo).
